@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olasupo Abimbola Adebayo | Senior Data Scientist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-bg: #121212;
+      --dark-text: #ffffff;
+      --dark-accent: #1e88e5;
+      --light-bg: #f5f5f5;
+      --light-text: #333333;
+      --light-accent-blue: #1e88e5;
+      --light-accent-orange: #ff6d00;
+      --gradient-blue: #1e88e5;
+      --gradient-orange: #ff6d00;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      transition: all 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    /* Dark/Light Mode Styles */
+    body.dark-mode { 
+      background-color: var(--dark-bg); 
+      color: var(--dark-text); 
+    }
+    body.light-mode { 
+      background-color: var(--light-bg); 
+      color: var(--light-text); 
+    }
+
+    /* Header with Colorful Animation */
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+      transform: translateY(-20px);
+      opacity: 0;
+      animation: fadeInDown 0.8s ease-out forwards;
+      background: linear-gradient(135deg, var(--dark-bg), var(--dark-bg));
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.light-mode header {
+      background: linear-gradient(135deg, var(--gradient-blue), var(--gradient-orange));
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, 
+        rgba(30, 136, 229, 0.8) 0%, 
+        rgba(255, 109, 0, 0.8) 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 0;
+    }
+
+    body.light-mode header::before {
+      opacity: 1;
+    }
+
+    header h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 700;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-image: linear-gradient(135deg, var(--dark-text), var(--dark-text));
+    }
+
+    body.light-mode header h1 {
+      background-image: linear-gradient(135deg, #fff, #eee);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+      color: var(--dark-text);
+    }
+
+    body.light-mode .tagline {
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeInDown {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Toggle Button */
+    .toggle-container {
+      text-align: right;
+      padding: 1rem;
+    }
+
+    .toggle-btn {
+      background: var(--dark-accent);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    body.light-mode .toggle-btn {
+      background: var(--light-accent-orange);
+      color: white;
+    }
+
+    .toggle-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Section Toggles */
+    .section-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem auto;
+      max-width: 800px;
+    }
+
+    .section-toggle-btn {
+      background: var(--dark-accent);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    body.light-mode .section-toggle-btn {
+      background: var(--light-accent-blue);
+    }
+
+    .section-toggle-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .section-toggle-btn.active {
+      background: var(--light-accent-orange);
+      transform: translateY(-3px);
+    }
+
+    body.light-mode .section-toggle-btn.active {
+      background: var(--light-accent-orange);
+    }
+
+    /* Collapsible Sections */
+    .collapsible {
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* About Me Section */
+    #about {
+      background: rgba(30, 136, 229, 0.1);
+      border-radius: 12px;
+      padding: 0;
+      max-height: 0;
+      opacity: 0;
+      transform: scale(0.95);
+      margin: 0 auto 1rem;
+    }
+
+    #about.expanded {
+      max-height: 500px;
+      opacity: 1;
+      padding: 2rem;
+      transform: scale(1);
+    }
+
+    /* Contact Section */
+    #contact {
+      display: flex;
+      justify-content: space-between;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      margin: 0 auto;
+      gap: 1rem;
+    }
+
+    #contact.expanded {
+      max-height: 200px;
+      opacity: 1;
+      padding: 1rem 0;
+    }
+
+    .contact-shell {
+      flex: 1;
+      background: rgba(30, 136, 229, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: all 0.4s ease-out;
+    }
+
+    #contact.expanded .contact-shell {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    #contact.expanded .contact-shell:first-child {
+      transition-delay: 0.1s;
+    }
+
+    #contact.expanded .contact-shell:last-child {
+      transition-delay: 0.2s;
+    }
+
+    body.light-mode .contact-shell {
+      background: rgba(255, 109, 0, 0.1);
+    }
+
+    .contact-shell h3 {
+      margin-top: 0;
+      color: var(--dark-accent);
+    }
+
+    body.light-mode .contact-shell h3 {
+      color: var(--light-accent-orange);
+    }
+
+    .contact-shell p {
+      margin-bottom: 0;
+    }
+
+    #contact a {
+      color: var(--dark-accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    body.light-mode #contact a {
+      color: var(--light-accent-orange);
+    }
+
+    #contact a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--dark-bg);
+      color: var(--dark-text);
+      font-weight: 500;
+      margin-top: 2rem;
+    }
+
+    body.light-mode footer {
+      background: linear-gradient(135deg, var(--light-accent-blue), var(--light-accent-orange));
+      color: white;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .tagline {
+        font-size: 1.1rem;
+      }
+      
+      #contact {
+        flex-direction: column;
+      }
+      
+      .contact-shell {
+        transform: translateY(20px);
+      }
+      
+      #contact.expanded .contact-shell {
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="dark-mode">
+  <div class="toggle-container">
+    <button class="toggle-btn" onclick="toggleMode()">Switch to Light Mode</button>
+  </div>
+
+  <header>
+    <h1>Olasupo Abimbola Adebayo</h1>
+    <p class="tagline">Senior Data Scientist</p>
+  </header>
+
+  <div class="section-toggle">
+    <button class="section-toggle-btn" onclick="toggleSection('about')">About Me</button>
+    <button class="section-toggle-btn" onclick="toggleSection('contact')">Contact</button>
+  </div>
+
+  <div id="about" class="collapsible">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate Senior Data Scientist with a strong drive for learning and growth. 
+      My interest in data science and collaborative projects fuels my professional journey. 
+      I enjoy working on projects that allow me to apply my analytical skills and contribute 
+      to meaningful outcomes.
+    </p>
+  </div>
+
+  <div id="contact" class="collapsible">
+    <div class="contact-shell">
+      <h3>Email</h3>
+      <p><a href="mailto:olasupo0@gmail.com">olasupo0@gmail.com</a></p>
+    </div>
+    <div class="contact-shell">
+      <h3>Phone</h3>
+      <p><a href="tel:+2347033394816">+234 703 339 4816</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Olasupo Abimbola Adebayo. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Dark/Light mode toggle
+    function toggleMode() {
+      const body = document.body;
+      const btn = document.querySelector('.toggle-btn');
+
+      if (body.classList.contains('dark-mode')) {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        btn.textContent = 'Switch to Dark Mode';
+      } else {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        btn.textContent = 'Switch to Light Mode';
+      }
+    }
+
+    // Section toggle functionality
+    function toggleSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      const btn = document.querySelector(`.section-toggle-btn[onclick="toggleSection('${sectionId}')]`);
+      
+      // Toggle the section
+      section.classList.toggle('expanded');
+      
+      // Toggle button active state
+      btn.classList.toggle('active');
+      
+      // Close other sections if this one is being opened
+      if (section.classList.contains('expanded')) {
+        const allSections = document.querySelectorAll('.collapsible');
+        allSections.forEach(sec => {
+          if (sec.id !== sectionId && sec.classList.contains('expanded')) {
+            sec.classList.remove('expanded');
+            document.querySelector(`.section-toggle-btn[onclick="toggleSection('${sec.id}')]`).classList.remove('active');
+          }
+        });
+      }
+    }
+
+    // Initialize with all sections closed
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('about').classList.remove('expanded');
+      document.getElementById('contact').classList.remove('expanded');
+    });
+  </script>
+</body>
+</html>
